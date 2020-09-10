@@ -80,7 +80,7 @@ class Communities(ViewSet):
     def list(self, request):
          """Handle GET requests to community resource
         Returns:
-            Response -- JSON serialized list of products
+            Response -- JSON serialized list of communities
         """
         communities = Community.objects.all()
         serializer = CommunitySerializer(communities, many=True, context={'request':request})
