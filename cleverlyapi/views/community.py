@@ -36,7 +36,7 @@ class Communities(ViewSet):
         return Response(serializer.data, content_type='application/json')
 
     def retrieve(self, request, pk=None):
-       """Handle GET operation
+        """Handle GET operation
         Returns:
             Response -- JSON serialized community instance
         """   
@@ -78,7 +78,7 @@ class Communities(ViewSet):
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
-         """Handle GET requests to community resource
+        """Handle GET requests to community resource
         Returns:
             Response -- JSON serialized list of communities
         """

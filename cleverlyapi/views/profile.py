@@ -12,7 +12,7 @@ from django.contrib.auth.hashers import make_password
 from ..models import Profile
 
 class UserViewSet(viewsets.ModelViewSet):
-  queryset = User.objects.all()
+    queryset = User.objects.all()
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -76,3 +76,13 @@ class Profiles(ViewSet):
         user.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+    def list(self, request):
+
+        profiles = Profile.objects.all()
+        serializer = ProfileSerializer(
+            profiles,
+            many=True,
+            context={'request':request}
+        )
+        return Response(serializer.data)
