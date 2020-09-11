@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+import json
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -40,6 +41,7 @@ def register_user(request):
     new_profile = Profile.objects.create(
         about = req_body['about'],
         profile_image = req_body['profile_image'],
+        likes=req_body['likes'],
         user=new_user
     )
 

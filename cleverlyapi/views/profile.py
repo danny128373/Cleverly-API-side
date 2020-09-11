@@ -14,13 +14,13 @@ from ..models import Profile
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
 
-class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        url = serializers.HyperlinkedIdentityField(
-            view_name='profile',
-            lookup_field='id'
-        )
+        # url = serializers.HyperlinkedIdentityField(
+        #     view_name='profile',
+        #     lookup_field='id'
+        # )
         fields = ('id', 'user', 'profile_image', 'about', 'likes')
         depth = 1
 
