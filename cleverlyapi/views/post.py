@@ -8,21 +8,21 @@ from ..models import Profile
 from ..models import Community
 from ..models import Post
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        url = serializers.HyperlinkedIdentityField(
-            view_name='post',
-            lookup_field='id'
-        )
-        fields=('id','url', 'post_date', 'community', 'profile', 'content', 'title', 'likes')
+        # url = serializers.HyperlinkedIdentityField(
+        #     view_name='post',
+        #     lookup_field='id'
+        # )
+        fields=('id','created_at', 'community', 'profile', 'content', 'title', 'likes')
         depth=2
 
 class Posts(ViewSet):
 
     def create(self,request):
-        profile= Profile.objects.get(user_id=request.user.id)
+        profile= Profile.objects.get(pk=request.data['profile_id'])
         community = Community.objects.get(pk=request.data['community_id'])
 
         post = Post.objects.create(

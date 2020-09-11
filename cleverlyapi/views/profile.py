@@ -54,7 +54,7 @@ class Profiles(ViewSet):
         try:
             profile = Profile.objects.get(pk=pk)
             serializer = ProfileSerializer(
-                customer, context={'request': request})
+                profile, context={'request': request})
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
@@ -79,7 +79,10 @@ class Profiles(ViewSet):
 
     def list(self, request):
 
-        profiles = Profile.objects.all()
+        if request.user.id:
+            profiles = Profile.objects.filter(user=request.user.id)
+        else:
+            profiles = Profile.objects.all()
         serializer = ProfileSerializer(
             profiles,
             many=True,

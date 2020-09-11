@@ -7,15 +7,15 @@ from ..models import Profile
 from ..models import Community
 from ..models import ProfileCommunity
 
-class ProfileCommunitySerializer(serializers.HyperlinkedModelSerializer):
+class ProfileCommunitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProfileCommunity
-        url = serializers.HyperlinkedIdentityField(
-            view_name='profilecommunity',
-            lookup_field='id'
-        )
-        fields=('id','url', 'community', 'profile')
+        # url = serializers.HyperlinkedIdentityField(
+        #     view_name='profilecommunity',
+        #     lookup_field='id'
+        # )
+        fields=('id', 'community', 'profile')
         depth=1
     
 class ProfileCommunities(ViewSet):
@@ -26,7 +26,7 @@ class ProfileCommunities(ViewSet):
         profile = Profile.objects.get(pk=request.data['profile_id'])
         profile_community.profile=profile
 
-        community = Community.objects(pk=request.data['community_id'])
+        community = Community.objects.get(pk=request.data['community_id'])
         profile_community.community = community
 
         profile_community.save()
