@@ -13,7 +13,7 @@ class RelationshipSerializer(serializers.HyperlinkedModelSerializer):
         model = Relationship
         url = serializers.HyperlinkedIdentityField(
             view_name='relationship',
-            lookup_id='id'
+            lookup_field='id'
         )
         fields=('id', 'url', 'friender', 'friendee', 'status')
         depth = 2
