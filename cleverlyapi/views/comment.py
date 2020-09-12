@@ -8,21 +8,21 @@ from ..models import Profile
 from ..models import Post
 from ..models import Comment
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Comment
-        url = serializers.HyperlinkedIdentityField(
-            view_name='comment',
-            lookup_field='id'
-        )
-        fields = ('id', 'url', 'content', 'post', 'profile')
+        # url = serializers.HyperlinkedIdentityField(
+        #     view_name='comment',
+        #     lookup_field='id'
+        # )
+        fields = ('id', 'content', 'post', 'profile')
         depth = 2
 
 class Comments(ViewSet):
 
     def create(self, request):
-        profile = Profile.objects.get(user_id=request.user.id)
+        profile = Profile.objects.get(pk=request.data['profile_id'])
         post = Post.objects.get(pk=request.data['post_id'])
 
         comment = Comment.objects.create(
