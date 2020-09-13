@@ -32,4 +32,4 @@ media/
 # django migrations
 migrations
 db.session.sql
-productimg
+connection.py

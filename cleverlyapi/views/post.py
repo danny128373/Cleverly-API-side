@@ -1,3 +1,4 @@
+import sqlite3
 from django.http import HttpResponseServerError
 from django.http import HttpResponse
 from rest_framework.viewsets import ViewSet
@@ -7,6 +8,7 @@ from rest_framework import status
 from ..models import Profile
 from ..models import Community
 from ..models import Post
+from ..models import ProfileCommunity
 
 class PostSerializer(serializers.ModelSerializer):
 
@@ -66,9 +68,25 @@ class Posts(ViewSet):
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
+        profile = Profile.objects.get(user_id = request.auth.user)
         posts = Post.objects.all()
+        communities = ProfileCommunity.objects.filter(profile_id=profile.id)
+        community_ids = []
+        post_list = []
+        for community in communities:
+            community_ids.append(community.community_id)
+            print('community.id', community.community_id)
+
+        for post in posts:
+            print("post.community_id", post.community_id)
+            for community_id in community_ids:
+                print('community_id',community_id)
+                if post.community_id == community_id:
+                    
+                    post_list.append(post)
+        
         serializer = PostSerializer(
-            posts,
+            post_list,
             many=True,
             context={'request':request}
         )
