@@ -70,5 +70,8 @@ class Communities(ViewSet):
 
     def list(self, request):
         communities = Community.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            communities = communities.filter(name__startswith=name)
         serializer = CommunitySerializer(communities, many=True, context={'request':request})
         return Response(serializer.data)
