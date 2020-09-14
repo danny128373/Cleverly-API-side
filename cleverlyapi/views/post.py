@@ -75,12 +75,9 @@ class Posts(ViewSet):
         post_list = []
         for community in communities:
             community_ids.append(community.community_id)
-            print('community.id', community.community_id)
 
         for post in posts:
-            print("post.community_id", post.community_id)
             for community_id in community_ids:
-                print('community_id',community_id)
                 if post.community_id == community_id:
                     
                     post_list.append(post)

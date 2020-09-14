@@ -11,7 +11,6 @@ from cleverlyapi.views import Messages
 from cleverlyapi.views import Posts
 from cleverlyapi.views import Profiles
 from cleverlyapi.views import ProfileCommunities
-from cleverlyapi.views import home_post_list
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'comments', Comments, 'comment')
@@ -29,5 +28,4 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('register/', register_user),
     path('login/', login_user),
-    path('home/', home_post_list),
 ]

@@ -8,5 +8,3 @@ from .register import register_user
 from .register import login_user
 from .relationship import Relationships
 from .post import Posts, PostSerializer
-from .connection import Connection
-from .home_post_list import home_post_list
