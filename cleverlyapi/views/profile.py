@@ -66,13 +66,13 @@ class Profiles(ViewSet):
         """
 
         profile = Profile.objects.get(pk=pk)
-        profile.address = request.data["address"]
-        profile.phone_number = request.data["phone_number"]
+        profile.profile_image = request.data["profile_image"]
+        profile.about = request.data["about"]
         profile.save()
 
-        user = User.objects.get(pk=profile.user.id)
-        user.about = request.data["about"]
-        user.profile_image = request.data["profile_image"]
+        user = User.objects.get(pk=profile.user_id)
+        user.first_name = request.data["first_name"]
+        user.last_name = request.data["last_name"]
         user.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
