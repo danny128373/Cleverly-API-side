@@ -49,7 +49,7 @@ class Comments(ViewSet):
         
     def update(self, request, pk=None):
 
-        comment = Comment.object.get(pk=pk)
+        comment = Comment.objects.get(pk=request.data['id'])
         comment.content = request.data['content']
         comment.save()
 

@@ -49,12 +49,9 @@ class Posts(ViewSet):
             return HttpResponseServerError(ex)
     
     def update(self, request, pk=None):
-        print(request.data['title'])
         post = Post.objects.get(pk=pk)
-        print(post.title)
         post.title = request.data['title']
         post.content = request.data['content']
-        print(post.title)
         post.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
