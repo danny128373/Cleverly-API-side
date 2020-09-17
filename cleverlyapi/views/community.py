@@ -52,8 +52,8 @@ class Communities(ViewSet):
 
     def update(self, request, pk=None):
         community = Community.objects.get(pk=pk)
-        community.name = request.data['name'],
-        community.description = request.data['description'],
+        community.name = request.data['name']
+        community.description = request.data['description']
         community.image = request.data['image']
         community.save()
 
