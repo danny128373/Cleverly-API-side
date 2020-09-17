@@ -1,4 +1,3 @@
-import sqlite3
 from django.http import HttpResponseServerError
 from django.http import HttpResponse
 from rest_framework.viewsets import ViewSet
@@ -18,7 +17,7 @@ class PostSerializer(serializers.ModelSerializer):
         #     view_name='post',
         #     lookup_field='id'
         # )
-        fields=('id','created_at', 'community', 'profile', 'content', 'title', 'likes')
+        fields=('id','created_at', 'community', 'profile', 'content', 'title')
         depth=2
 
 class Posts(ViewSet):
@@ -78,7 +77,6 @@ class Posts(ViewSet):
         for post in posts:
             for community_id in community_ids:
                 if post.community_id == community_id:
-                    
                     post_list.append(post)
         
         serializer = PostSerializer(

@@ -7,4 +7,5 @@ from .profile import Profiles
 from .register import register_user
 from .register import login_user
 from .relationship import Relationships
-from .post import Posts, PostSerializer
+from .post import Posts
+from .profile_likes_comment import ProfileLikesComment
