@@ -9,3 +9,4 @@ from .register import login_user
 from .relationship import Relationships
 from .post import Posts
 from .profile_likes_comment import ProfileLikesComment
+from .profile_post_reaction import ProfilePostReaction

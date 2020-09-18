@@ -7,3 +7,4 @@ from .profile import Profile
 from .profile_community import ProfileCommunity
 from .relationship import Relationship
 from .profile_likes_comment import ProfileLikesComment
+from .profile_post_reaction import ProfilePostReaction
