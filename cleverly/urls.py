@@ -12,7 +12,7 @@ from cleverlyapi.views import Posts
 from cleverlyapi.views import Profiles
 from cleverlyapi.views import ProfileCommunities
 from cleverlyapi.views import ProfileLikesComment
-
+from cleverlyapi.views import ProfilePostReaction
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'comments', Comments, 'comment')
@@ -23,6 +23,7 @@ router.register(r'posts', Posts, 'post')
 router.register(r'profiles', Profiles, 'profile')
 router.register(r'profilecommunities', ProfileCommunities, 'profilecommunity')
 router.register(r'profilelikescomments', ProfileLikesComment, 'profilelikescomment')
+router.register(r'profilepostreactions', ProfilePostReaction, 'profilepostreaction')
 
 urlpatterns = [
     path('', include(router.urls)),
