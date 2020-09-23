@@ -1,7 +1,6 @@
 from django.http import HttpResponseServerError
 from django.http import HttpResponse
 from rest_framework.authtoken.models import Token
-
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers
@@ -11,22 +10,27 @@ from rest_framework import viewsets
 from django.contrib.auth.hashers import make_password
 from ..models import Profile
 
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
 
+
 class ProfileSerializer(serializers.ModelSerializer):
+    """JSON serializer for profile"""
+
     class Meta:
         model = Profile
-        # url = serializers.HyperlinkedIdentityField(
-        #     view_name='profile',
-        #     lookup_field='id'
-        # )
         fields = ('id', 'user', 'profile_image', 'about', 'likes')
         depth = 1
 
+
 class Profiles(ViewSet):
-    
+
     def create(self, request):
+        """
+        Handle POST request for a profile
+        Returns: JSON serialized profile instance
+        """
         user = User.objects.create_user(
             first_name=request.data['first_name'],
             last_name=request.data['last_name'],
@@ -41,15 +45,14 @@ class Profiles(ViewSet):
             user=user
         )
 
-        token= Token.objects.create(user=user)
+        token = Token.objects.create(user=user)
 
-        data = json.dumps({"token":token.key})
+        data = json.dumps({"token": token.key})
         return HttpResponse(data, content_type='application/json')
-    
+
     def retrieve(self, request, pk=None):
         """Handle GET requests
-        Returns:
-            Response -- JSON serialized profile instance
+        Returns: Response -- JSON serialized profile instance
         """
         try:
             profile = Profile.objects.get(pk=pk)
@@ -61,8 +64,7 @@ class Profiles(ViewSet):
 
     def update(self, request, pk=None):
         """Handle PUT requests
-        Returns:
-            Response -- Empty body with 204 status code
+        Returns: Response -- Empty body with 204 status code
         """
 
         profile = Profile.objects.get(pk=pk)
@@ -78,7 +80,10 @@ class Profiles(ViewSet):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def list(self, request):
-
+        """
+        Handle GET requests for profiles
+        Returns: Response JSON serialized list of profiles
+        """
         if request.user.id:
             profiles = Profile.objects.filter(user=request.user.id)
         else:
@@ -86,6 +91,6 @@ class Profiles(ViewSet):
         serializer = ProfileSerializer(
             profiles,
             many=True,
-            context={'request':request}
+            context={'request': request}
         )
         return Response(serializer.data)
