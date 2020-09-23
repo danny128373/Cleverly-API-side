@@ -1,3 +1,5 @@
+<p align="center"><img alt="RepCount" src="https://res.cloudinary.com/dp5l2gxzh/image/upload/v1600887426/Navbar_icons_17_lp2wno.png" width=300px height="250px" /></p>
+
 # About the Project
 
 Cleverly is an app developed for users interested in an unbelievably random highlight reel of hilarious comments, mindblowing pictures, ridiculous stories, memes, lots of ingenious puns, cats, etc. Cleverly is whatever you want it to be. The communities mentioned earlier are incredible communities that are great sources for content based on a specific topic. All you have to do is join the community. And believe me, there truly is a community for everything.
