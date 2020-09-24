@@ -40,7 +40,7 @@ class Profiles(ViewSet):
         )
 
         profile = Profile.objects.create(
-            about=request.data['about'],
+            about="",
             profile_image=request.data['profile_image'],
             user=user
         )
