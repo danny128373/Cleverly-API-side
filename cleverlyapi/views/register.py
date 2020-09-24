@@ -42,7 +42,7 @@ def register_user(request):
     )
 
     new_profile = Profile.objects.create(
-        about=req_body['about'],
+        about="",
         profile_image=req_body['profile_image'],
         likes=req_body['likes'],
         user=new_user
